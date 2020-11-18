@@ -1,1 +1,0 @@
-[DEMO LINK](https://oivannikov.github.io/tower-task/)
