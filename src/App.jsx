@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="app">
-      <Carousel slides={usersSlider} goToSlide={activeSlide} offsetRadius={2} />
+      <Carousel slides={usersSlider} goToSlide={activeSlide} offsetRadius={0} />
 
       <Modal active={modalActive} setActive={setModalActive} >
         <SelectedUser setActive={setModalActive} currentUser={currentUser} />
