@@ -11,6 +11,11 @@ li {
   margin: 0;
 }
 
+button {
+  border: none;
+  background: none;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -18,4 +23,20 @@ li {
   align-items: center;
   height: calc(100vh - 30px);
   padding: 15px;
+  overflow-x: hidden;
+ 
+  &__user {
+    text-align: center;
+    background-color: #00bfafd0;
+    width: 200px;
+    padding: 15px 0;
+    height: 220px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    z-index: -1;
+
+    &:hover {
+      box-shadow: 0 6px 23px #00bfa5;
+    }
+  }
 }

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import '../Pagination/Pagination.scss'
 
-export function Pagination({ countPages, setCurrentPage, currentPage }) {
+export function Pagination({ countPages, handleCurrentPage, currentPage }) {
   const pageNumbers = [];
 
   for (let i = 1; i <= countPages; i++) {
@@ -16,8 +16,8 @@ export function Pagination({ countPages, setCurrentPage, currentPage }) {
     {
       pageNumbers.map(number => (
         <>
-          <li className="pagination__page" onClick={() => setCurrentPage(number)}>
-            <a className={classNames('pagination__page-link', {pagination__active: number === currentPage})}>{number}</a>
+          <li className={classNames('pagination__page', {active: number === currentPage})} onClick={() => handleCurrentPage(number)} key={number}>
+            <a className="pagination__page-link">{number}</a>
           </li>
         </>
       ))

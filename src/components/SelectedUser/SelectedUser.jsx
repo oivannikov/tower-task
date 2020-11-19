@@ -2,7 +2,9 @@ import React from 'react';
 
 import '../SelectedUser//SelectedUser.scss';
 
-export function SelectedUser({ setActive }) {
+export function SelectedUser({ setActive, currentUser }) {
+  const { name, desc, surname } = currentUser;
+
   return (
     <div className="info">
 
@@ -12,36 +14,26 @@ export function SelectedUser({ setActive }) {
             <input  
               type="text"
               required
+              value={name}
             />
           </div>
 
           <div className="info__user-surname">
             <input
               type="text"
+              value={surname}
               required
             />
           </div>
         </div>
 
         <div className="info__user-description">
-          <textarea
-            className="info__user-text"
-            type="textarea"
-            name="info"
-            required
-          ></textarea>
+          <p>{desc}</p>
         </div>
       </div>
-
-      <div className="info__user-buttons">
-        <div>
-          <button className="info__user-delete">Delete user</button>          
-        </div>
-  
-        <div>
-          <button className="info__user-cancel" onClick={() => setActive(false)}>Cancel</button>
-          <button className="info__user-save">Save</button>
-        </div>
+    
+      <div className="info__user-button">
+        <button className="info__user-cancel" onClick={() => setActive(false)}>Cancel</button>
       </div>
     </div>
   );

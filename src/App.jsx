@@ -6,24 +6,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from './components/Modal/Modal';
 import { SelectedUser } from './components/SelectedUser/SelectedUser';
 import { Pagination } from './components/Pagination/Pagination';
-import { UsersList } from './components/UsersList/UsersList';
+
+import Carousel from 'react-spring-3d-carousel';
 
 import { getUsers } from './api/users';
 
 import './App.scss';
 
-
 function App() {
   const [modalActive, setModalActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState({});
+  const [activeSlide, setActiveSlide] = useState(0);
+
   const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getUsers()
       .then(users => dispatch(actionSetUsers(users)));
   }, []);
 
+  useEffect(() => {
+    let timerId;
+
+    if (!modalActive) {
+      timerId = setInterval(() => {
+        setActiveSlide(prevState => prevState + 1);
+      }, 2000);
+    }
+
+    return () => clearInterval(timerId);
+  }, [currentPage, modalActive]);
 
   const usersPerPage = 5;
   const countPages = Math.ceil(users.length / usersPerPage);
@@ -31,15 +45,36 @@ function App() {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
+  function handleCurrentUser(user) {
+    setCurrentUser(user);
+    setModalActive(true);
+    
+  }
+
+  function handleCurrentPage(number) {
+    setCurrentPage(number);
+    setActiveSlide(0);
+  }
+
+  const usersSlider = currentUsers.map(user => ({
+    key: user.id,
+    content: (
+      <li className="app__user">
+        {user.name}
+      </li>
+    ),
+    onClick: () => handleCurrentUser(user),
+  }));
+
   return (
     <div className="app">
-      <UsersList users={currentUsers} />
+      <Carousel slides={usersSlider} goToSlide={activeSlide} offsetRadius={2} />
 
       <Modal active={modalActive} setActive={setModalActive} >
-        <SelectedUser setActive={setModalActive} />
+        <SelectedUser setActive={setModalActive} currentUser={currentUser} />
       </Modal>
-  
-      <Pagination countPages={countPages} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+
+      <Pagination countPages={countPages} handleCurrentPage={handleCurrentPage} currentPage={currentPage} />
     </div>
   );
 }
