@@ -8,14 +8,22 @@
     cursor: pointer;
   }
 
-  &__page-link {
+  & &__page-number {
     font-size: 18px;
+    color: #00bfafd0;
+    padding: 10px;
+  }
+
+  & li.active > span {
+    color: white;
   }
 
   &__prev,
   &__next {
     font-size: 18px;
     cursor: pointer;
+    color: #00bfafd0;
+    margin: 0 20px;
   }
-
 }
+

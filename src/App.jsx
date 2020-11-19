@@ -14,10 +14,10 @@ import { getUsers } from './api/users';
 import './App.scss';
 
 function App() {
-  const [modalActive, setModalActive] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const [currentUser, setCurrentUser] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [modalActive, setModalActive] = useState(false);
 
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
@@ -28,12 +28,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    let timerId;
+    let timerId = null;
 
     if (!modalActive) {
       timerId = setInterval(() => {
         setActiveSlide(prevState => prevState + 1);
-      }, 2000);
+      }, 8000);
     }
 
     return () => clearInterval(timerId);
@@ -58,7 +58,6 @@ function App() {
   function handleCurrentUser(user) {
     setCurrentUser(user);
     setModalActive(true);
-    
   }
 
   function handleCurrentPage(number) {

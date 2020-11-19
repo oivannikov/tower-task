@@ -2,6 +2,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background-color: #212121 ;
 }
 
 ul,
@@ -21,19 +22,21 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 30px);
-  padding: 15px;
+  padding: 15px 0;
+  height: 100vh;
   overflow-x: hidden;
  
   &__user {
     text-align: center;
     background-color: #00bfafd0;
     width: 200px;
-    padding: 15px 0;
+    padding: 40px 0;
     height: 220px;
+    font-size: 26px;
     margin-bottom: 20px;
-    border-radius: 12px;
+    border-radius: 30%;
     z-index: -1;
+    color: white;
 
     &:hover {
       box-shadow: 0 6px 23px #00bfa5;

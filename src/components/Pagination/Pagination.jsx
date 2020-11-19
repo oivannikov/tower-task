@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import '../Pagination/Pagination.scss'
+import './Pagination.scss'
 
 export function Pagination({ countPages, handleCurrentPage, currentPage, handlePrevPage, handleNextPage }) {
   const pageNumbers = [];
@@ -17,15 +18,26 @@ export function Pagination({ countPages, handleCurrentPage, currentPage, handleP
       <ul>
       {
         pageNumbers.map(number => (
-          <>
-            <li className={classNames('pagination__page', {active: number === currentPage})} onClick={() => handleCurrentPage(number)} key={number}>
-              <a className="pagination__page-link">{number}</a>
+          <Fragment key={number}>
+            <li
+              className={classNames('pagination__page', {active: number === currentPage})}
+              onClick={() => handleCurrentPage(number)}
+            >
+              <span className="pagination__page-number">{number}</span>
             </li>
-          </>
+          </Fragment>
         ))
       }
       </ul>
       <span className="pagination__next" onClick={() => handleNextPage()}>Next</span>
     </div>
   );
+}
+
+Pagination.propTypes = {
+  countPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  handleCurrentPage: PropTypes.func.isRequired,
+  handlePrevPage: PropTypes.func.isRequired,
+  handleNextPage: PropTypes.func.isRequired,
 }

@@ -3,8 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Modal.scss';
-
-export function Modal({ active, setActive, children}) {
+export function Modal({ active, setActive, children }) {
   return (
     <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)} >
       <div className={active ? 'modal__content active' : 'modal'} onClick={(e) => e.stopPropagation()} >
