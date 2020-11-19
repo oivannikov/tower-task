@@ -45,6 +45,16 @@ function App() {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
+  const usersSlider = currentUsers.map(user => ({
+    key: user.id,
+    content: (
+      <li className="app__user">
+        {user.name}
+      </li>
+    ),
+    onClick: () => handleCurrentUser(user),
+  }));
+
   function handleCurrentUser(user) {
     setCurrentUser(user);
     setModalActive(true);
@@ -56,15 +66,17 @@ function App() {
     setActiveSlide(0);
   }
 
-  const usersSlider = currentUsers.map(user => ({
-    key: user.id,
-    content: (
-      <li className="app__user">
-        {user.name}
-      </li>
-    ),
-    onClick: () => handleCurrentUser(user),
-  }));
+  function handlePrevPage() {
+    if (currentPage > 1) {
+      setCurrentPage(prevState => prevState - 1);
+    }
+  }
+
+  function handleNextPage() {
+    if (currentPage < countPages) {
+      setCurrentPage(prevState => prevState + 1);
+    }
+  }
 
   return (
     <div className="app">
@@ -74,7 +86,13 @@ function App() {
         <SelectedUser setActive={setModalActive} currentUser={currentUser} />
       </Modal>
 
-      <Pagination countPages={countPages} handleCurrentPage={handleCurrentPage} currentPage={currentPage} />
+      <Pagination
+        countPages={countPages}
+        handleCurrentPage={handleCurrentPage}
+        currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
+      />
     </div>
   );
 }
