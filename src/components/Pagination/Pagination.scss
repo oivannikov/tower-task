@@ -1,0 +1,21 @@
+.pagination {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+
+  &__page {
+    margin: 10px;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  &__page-link {
+    font-size: 18px;
+  }
+
+  &__active {
+    background-color: #00bfa5;
+    color: white;
+    padding: 10px;
+  }
+}
